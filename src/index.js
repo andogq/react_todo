@@ -10,36 +10,12 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            items: [
-                {
-                    text: "Blah blah blah yeah woo",
-                    done: false,
-                    id: 0
-                },
-                {
-                    text: "Blah blah yeah woo",
-                    done: false,
-                    id: 1
-                },
-                {
-                    text: "Blah yeah ahhh",
-                    done: false,
-                    id: 2
-                },
-                {
-                    text: "Blah blah yeet woo",
-                    done: false,
-                    id: 3
-                },
-                {
-                    text: "Yeeteth",
-                    done: true,
-                    id: 4
-                }
-            ]
+            nextId: 0,
+            items: []
         }
 
         this.toggleItem = this.toggleItem.bind(this);
+        this.addItem = this.addItem.bind(this);
     }
 
     toggleItem(itemId) {
@@ -54,9 +30,24 @@ class App extends React.Component {
         this.setState({items});
     }
 
+    addItem(text) {
+        let items = this.state.items.slice();
+
+        items.push({
+            text,
+            done: false,
+            id: this.state.nextId
+        });
+
+        this.setState({
+            items,
+            nextId: this.state.nextId + 1
+        });
+    }
+
     render() {
         return [
-            <NewTodo key="0"/>,
+            <NewTodo addItem={this.addItem} key="0"/>,
             <TodoList list={this.state.items} toggleItem={this.toggleItem} key="1"/>
         ];
     }
