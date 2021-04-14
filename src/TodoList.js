@@ -6,7 +6,11 @@ class TodoList extends React.Component {
     render() {
         return (
             <div id="container_todo_list">
-                <Todo item="yeet yeet"/>
+                {
+                    this.props.list.sort((a, b) => a.done > b.done).map(({item, done, id}) => 
+                        <Todo item={item} done={done} key={id}/>
+                    )
+                }
             </div>
         )
     }
