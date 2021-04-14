@@ -12,37 +12,52 @@ class App extends React.Component {
         this.state = {
             items: [
                 {
-                    item: "Blah blah blah yeah woo",
+                    text: "Blah blah blah yeah woo",
                     done: false,
                     id: 0
                 },
                 {
-                    item: "Blah blah yeah woo",
+                    text: "Blah blah yeah woo",
                     done: false,
                     id: 1
                 },
                 {
-                    item: "Blah yeah ahhh",
+                    text: "Blah yeah ahhh",
                     done: false,
                     id: 2
                 },
                 {
-                    item: "Blah blah yeet woo",
+                    text: "Blah blah yeet woo",
                     done: false,
                     id: 3
                 },
                 {
-                    item: "Yeeteth",
+                    text: "Yeeteth",
                     done: true,
                     id: 4
                 }
             ]
         }
+
+        this.toggleItem = this.toggleItem.bind(this);
     }
+
+    toggleItem(itemId) {
+        let items = this.state.items.slice();
+
+        for (let item of items) {
+            if (item.id === itemId) {
+                item.done = !item.done;
+            }
+        }
+
+        this.setState({items});
+    }
+
     render() {
         return [
             <NewTodo key="0"/>,
-            <TodoList list={this.state.items} key="1"/>
+            <TodoList list={this.state.items} toggleItem={this.toggleItem} key="1"/>
         ];
     }
 }

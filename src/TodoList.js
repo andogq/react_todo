@@ -7,8 +7,8 @@ class TodoList extends React.Component {
         return (
             <div id="container_todo_list">
                 {
-                    this.props.list.sort((a, b) => a.done > b.done).map(({item, done, id}) => 
-                        <Todo item={item} done={done} key={id}/>
+                    this.props.list.sort((a, b) => a.done > b.done).map(item => 
+                        <Todo text={item.text} done={item.done} toggleItem={this.props.toggleItem} itemId={item.id} key={item.id}/>
                     )
                 }
             </div>
